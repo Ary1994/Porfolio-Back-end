@@ -1,0 +1,34 @@
+package com.porfolio_ary.porfolio_ary.security.Service;
+
+import com.porfolio_ary.porfolio_ary.security.Entity.Usuario;
+import com.porfolio_ary.porfolio_ary.security.Repository.iUsuarioRepository;
+import jakarta.transaction.Transactional;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+@Transactional
+public class UsuarioService {
+
+    @Autowired
+    iUsuarioRepository iusuarioRepository;
+
+    public Optional<Usuario> getByNombreUsuario(String nombreUsuario) {
+        return iusuarioRepository.findByNombreUsuario(nombreUsuario);
+    }
+
+    public boolean existsNombreUsuario(String nombreUsiario) {
+        return iusuarioRepository.existsByNombreUsuario(nombreUsiario);
+
+    }
+
+    public boolean existsEmail(String email) {
+        return iusuarioRepository.existsByEmail(email);
+
+    }
+    
+    public void save(Usuario usuario){
+        iusuarioRepository.save(usuario);
+    }
+}
